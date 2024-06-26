@@ -50,3 +50,13 @@ class RestRegister(View):
             messages.error(request, 'Please correct the error below.')
         return render(request, 'restRegister.html', {'form': form})
 
+from django.utils.translation import activate
+from django.conf import settings
+
+def switch_language(request):
+    if request.method == 'POST':
+        language = request.POST.get('language', settings.LANGUAGE_CODE)
+        activate(language)
+        response = redirect(request.POST.get('next', '/'))
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
+        return response
