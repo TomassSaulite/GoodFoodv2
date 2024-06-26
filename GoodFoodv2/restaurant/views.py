@@ -11,10 +11,10 @@ class Empty(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'empty.html')
     
-class UserLogin(View):
+class RestLogin(View):
     def get(self, request, *args, **kwargs):
         form = CustomAuthenticationForm()
-        return render(request, 'userLogin.html', {'form': form})
+        return render(request, 'restLogin.html', {'form': form})
     
     def post(self, request, *args, **kwargs):
         form = CustomAuthenticationForm()
@@ -30,13 +30,12 @@ class UserLogin(View):
             else:
                 messages.error(request, 'Invalid email or password.')
                 
-        # return render(request, 'empty.html', {'form': form})
-        return redirect('register')
+        return render(request, 'restLogin.html', {'form': form})
     
-class UserRegister(View):
+class RestRegister(View):
     def get(self, request, *args, **kwargs):
         form = UserRegistrationForm()
-        return render(request, 'userRegister.html', {'form': form})
+        return render(request, 'restRegister.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
         form = UserRegistrationForm(request.POST)
@@ -49,5 +48,5 @@ class UserRegister(View):
             return redirect('index')
         else:
             messages.error(request, 'Please correct the error below.')
-        return render(request, 'register.html', {'form': form})
+        return render(request, 'restRegister.html', {'form': form})
 

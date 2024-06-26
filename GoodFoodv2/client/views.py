@@ -11,7 +11,7 @@ class Empty(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'empty.html')
     
-class Login(View):
+class UserLogin(View):
     def get(self, request, *args, **kwargs):
         form = CustomAuthenticationForm()
         return render(request, 'login.html', {'form': form})
@@ -33,7 +33,7 @@ class Login(View):
         # return render(request, 'empty.html', {'form': form})
         return redirect('register')
     
-class Register(View):
+class UserRegister(View):
     def get(self, request, *args, **kwargs):
         form = UserRegistrationForm()
         return render(request, 'register.html', {'form': form})
