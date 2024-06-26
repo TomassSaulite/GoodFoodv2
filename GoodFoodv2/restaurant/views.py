@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login, authenticate
 from django.views import View
-from .forms import CustomAuthenticationForm, UserRegistrationForm
+from client.forms import CustomUserAuthenticationForm, UserRegistrationForm
 from django.contrib import messages
 
 class Index(View):
@@ -13,11 +13,11 @@ class Empty(View):
     
 class RestLogin(View):
     def get(self, request, *args, **kwargs):
-        form = CustomAuthenticationForm()
+        form = CustomUserAuthenticationForm()
         return render(request, 'restLogin.html', {'form': form})
     
     def post(self, request, *args, **kwargs):
-        form = CustomAuthenticationForm()
+        form = CustomUserAuthenticationForm()
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']

@@ -14,7 +14,7 @@
                 {{ form.as_p }}
                 <button type="submit">Login</button>
                 <br>
-                <a href="{% url 'register' %}">Dont have Account? Register!</a>
+                <a href="{% url 'restRegister' %}">Dont have Account? Register!</a>
                 {% if messages %}
                 <ul>
                     {% for message in messages %}
