@@ -9,18 +9,13 @@
     </div>
     <div class="row justify-content-center mt-1">
         <div class="card col-md-5 col-sm-12 offset-md-1 p-4 text-center">
-            <form method="post">
+            <form method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit">Login</button>
+                <br>
+                <a href="{% url 'register' %}">Dont have Account? Register!</a>
             </form>
-            {% if messages %}
-                <ul>
-                    {% for message in messages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
         </div>
     </div>
 </div>

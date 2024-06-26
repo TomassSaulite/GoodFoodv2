@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from .forms import CustomAuthenticationForm
+from .forms import UserRegistrationForm
 
 
 
@@ -10,16 +11,17 @@ class Index(View):
     
 class Login(View):
     def get(self, request, *args, **kwargs):
+        form_class = CustomAuthenticationForm
         return render(request, 'login.html')
     
 class Register(View):
     def get(self, request, *args, **kwargs):
+        form_class = UserRegistrationForm
         return render(request, 'register.html')
      
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib import messages
-from .forms import UserRegistrationForm
 
 def register_view(request):
     if request.method == 'POST':
@@ -39,23 +41,22 @@ def register_view(request):
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
-from .forms import CustomAuthenticationForm
 
 def login_view(request):
     if request.method == 'POST':
-        form = CustomAuthenticationForm(request.POST)
+        form = CustomAuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            email = form.cleaned_data.get('email')
+            username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            user = authenticate(request, email=email, password=password)
+            user = authenticate(request, username=username, password=password)
+            print(user)
+            print(username)
+            print(password)
             if user is not None:
                 login(request, user)
-                return redirect('index')  
-            else:
-                messages.error(request, 'Invalid email or password.')
-        else:
-            messages.error(request, 'Invalid email or password.')
+                # updateLastAccess()
+                return redirect('index')
     else:
         form = CustomAuthenticationForm()
-    
-    return render(request, 'registration/login.html', {'form': form})
+    return render(request, 'login.html', {'form': form})
+
