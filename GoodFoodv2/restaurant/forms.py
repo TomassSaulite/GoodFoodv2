@@ -25,8 +25,8 @@ class RestRegistrationForm(UserCreationForm):
     )   
     name = forms.CharField(max_length=30, required=True, help_text=None)
     email = forms.EmailField(max_length=254, required=True, help_text=None)
-    country = forms.CharField(max_length=3, required=True)
-    city = forms.CharField(max_length=3, required=True)
+    country = forms.CharField(max_length=3, required=True,help_text=None)
+    city = forms.CharField(max_length=3, required=True,help_text=None)
     class Meta(UserCreationForm.Meta):
         model = customRest
         fields =UserCreationForm.Meta.fields+('name',  'email', 'country','city',)

@@ -12,5 +12,4 @@ urlpatterns = [
     path('restaurant/register', RestRegister.as_view(), name='restRegister'),
     path('empty', Empty.as_view(), name='empty'),
     path('switch_language/', switch_language, name='switch_language'),
-
 ]

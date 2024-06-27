@@ -27,7 +27,7 @@ class UserRegistrationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, help_text=None)
     last_name = forms.CharField(max_length=30, required=True, help_text=None)
     email = forms.EmailField(max_length=254, required=True, help_text=None)
-    country = forms.CharField(max_length=3, required=True)
+    country = forms.CharField(max_length=3, required=True,help_text=None)
     class Meta(UserCreationForm.Meta):
         model = customUser
         fields =UserCreationForm.Meta.fields+('first_name', 'last_name', 'email', 'country')
