@@ -14,7 +14,7 @@ class Empty(View):
 class UserLogin(View):
     def get(self, request, *args, **kwargs):
         form = CustomUserAuthenticationForm()
-        return render(request, 'login.html', {'form': form})
+        return render(request, 'userLogin.html', {'form': form})
     
     def post(self, request, *args, **kwargs):
         form = CustomUserAuthenticationForm()
@@ -26,17 +26,17 @@ class UserLogin(View):
             if user is not None:
                 login(request, user)
                 print("!!!!!!!!!!!")
-                return redirect('register')
+                return redirect('userRegister')
             else:
                 messages.error(request, 'Invalid email or password.')
                 
         # return render(request, 'empty.html', {'form': form})
-        return redirect('register')
+        return redirect('userRegister')
     
 class UserRegister(View):
     def get(self, request, *args, **kwargs):
         form = UserRegistrationForm()
-        return render(request, 'register.html', {'form': form})
+        return render(request, 'userRegister.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
         form = UserRegistrationForm(request.POST)
@@ -49,5 +49,5 @@ class UserRegister(View):
             return redirect('index')
         else:
             messages.error(request, 'Please correct the error below.')
-        return render(request, 'register.html', {'form': form})
+        return render(request, 'userRegister.html', {'form': form})
 
